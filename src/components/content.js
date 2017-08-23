@@ -25,12 +25,9 @@ export default class Content extends Component {
     //   )
 
     fetchNowPlaying()
-      .then(resp => {
-        setTimeout(() => {
-          console.log(resp.data.films)
+      .then(resp =>
           this.setState({nowPlaying: resp.data.films})
-        }, 100)
-      })
+      )
       // .then(resp => console.log(resp))
       .catch(resp => console.log(resp))
   }
