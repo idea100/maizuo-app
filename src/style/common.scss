@@ -1,0 +1,115 @@
+@mixin super {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+html, body {
+  @include super;
+  font-family: sans-serif;
+}
+
+
+.header {
+  width: 100%;
+  height: 100px;
+  background-color: aliceblue;
+}
+
+ol, ul, li {
+  list-style: none;
+  display: inline;
+  margin: 0;
+  padding:0;
+}
+
+li {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+li img  {
+  width: 100%;
+}
+
+.top-images {
+  position: relative;
+  height: 250px;
+}
+
+.now-playing {
+  padding: 17px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.movice-msg {
+  width: 100%;
+  height: 50px;
+  background-color: #ccc;
+}
+
+.now-playing img {
+  width: 100%;
+}
+
+@for $i from 0 through 2 {
+  .silder#{$i} {
+    animation: img#{$i} 20s linear infinite;
+  }
+}
+
+//位于幻灯片最左端
+@mixin left {
+  left: -100%;
+  opacity: 0;
+  z-index: -1;
+}
+
+//居于幻灯片中间
+@mixin centor {
+  left: 0;
+  opacity: 1;
+  z-index: 0;
+}
+
+//居于幻灯片最右边
+@mixin right {
+  left: 100%;
+  opacity: 0;
+  z-index: -1;
+}
+
+@mixin choiceImage ($x) {
+  @if $x == 0 {@include centor;}
+  @if $x == 1 {@include left;}
+  @if $x == 2 {@include right;}
+}
+
+@for $i from 0 through 2 {
+  @keyframes img#{$i} {
+    0% {
+      @include choiceImage($i)
+    }
+    31% {
+      @include choiceImage($i)
+    }
+    33% {
+      @include choiceImage( ($i + 2) % 3)
+    }
+    64% {
+      @include choiceImage( ($i + 2) % 3)
+    }
+    66% {
+      @include choiceImage( ($i + 1) % 3)
+    }
+    98% {
+      @include choiceImage( ($i + 1) % 3)
+    }
+    100% {
+      @include choiceImage($i)
+    }
+  }
+}

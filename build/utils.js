@@ -50,11 +50,11 @@ exports.cssLoaders = function (options) {
       config: {
         path: '.postcssrc.js'
       }
-    })
+    }),
     // postcss: generateLoaders(),
     // less: generateLoaders('less'),
     // sass: generateLoaders('sass', { indentedSyntax: true }),
-    // scss: generateLoaders('sass'),
+    scss: generateLoaders('sass'),
     // stylus: generateLoaders('stylus'),
     // styl: generateLoaders('stylus')
   }
