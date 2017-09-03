@@ -39,7 +39,7 @@ export default class Content extends Component {
           <ul>
             {
               this.state.images.map((item, index) =>(
-                <li className={'silder' + index} key={index}>
+                <li className={'silder silder' + index} key={index}>
                   <img src={item.imageUrl} alt={item.name}/>
                 </li>
               ))
