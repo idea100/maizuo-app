@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { fetchImages, fetchNowPlaying } from '@/service/getData'
-import NowPlayingItems from './nowPlayingItems'
+
+import NowPlayingItems from '@/container/nowPlayingItems'
+import Slide from '@/container/Slide'
 
 
 export default class Content extends Component {
@@ -17,18 +19,10 @@ export default class Content extends Component {
       .then(resp => this.setState({images: resp.data.billboards}))
       .catch(resp => console.log(resp))
 
-    // fetch('/api/v4/api/film/now-playing', {page: 1, count: 5})
-    //   .then(resp => resp.json())
-    //   // .then(json => console.log(json.data.films))
-    //   .then(json =>
-    //     this.setState({nowPlaying: json.data.films})
-    //   )
-
     fetchNowPlaying()
       .then(resp =>
           this.setState({nowPlaying: resp.data.films})
       )
-      // .then(resp => console.log(resp))
       .catch(resp => console.log(resp))
   }
 
@@ -36,23 +30,10 @@ export default class Content extends Component {
     return (
       <div className="slide">
         <div className="top-images">
-          <ul>
-            {
-              this.state.images.map((item, index) =>(
-                <li className={'silder silder' + index} key={index}>
-                  <img src={item.imageUrl} alt={item.name}/>
-                </li>
-              ))
-            }
-          </ul>
+          <Slide items={this.state.images}></Slide>
         </div>
         <div>
-          <div>
-            {
-              this.state.nowPlaying.map((item, index) =>
-              <NowPlayingItems key={item.id} item={item}/>)
-            }
-          </div>
+          <NowPlayingItems items={this.state.nowPlaying}></NowPlayingItems>
         </div>
       </div>
     )
