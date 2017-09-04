@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { fetchImages, fetchNowPlaying } from '@/service/getData'
+import { fetchImages, fetchNowPlaying, fetchComingSoon } from '@/service/getData'
 
 import NowPlayingItems from '@/container/nowPlayingItems'
 import Slide from '@/container/Slide'
+import ComingSoonItems from '@/container/ComingSoonItems'
 
 
 export default class Content extends Component {
@@ -10,31 +11,34 @@ export default class Content extends Component {
     super(props)
     this.state = {
       images: [],
-      nowPlaying: []
+      nowPlaying: [],
+      comingSoon: []
     }
   }
 
   componentDidMount () {
     fetchImages()
       .then(resp => this.setState({images: resp.data.billboards}))
-      .catch(resp => console.log(resp))
+      .catch(err => console.log(err))
 
     fetchNowPlaying()
       .then(resp =>
           this.setState({nowPlaying: resp.data.films})
       )
-      .catch(resp => console.log(resp))
+      .catch(err => console.log(err))
+
+    fetchComingSoon()
+      .then(resp => this.setState({comingSoon: resp.data.films}))
+      .catch(err => console.log(err))
+
   }
 
   render () {
     return (
       <div className="slide">
-        <div className="top-images">
-          <Slide items={this.state.images}></Slide>
-        </div>
-        <div>
-          <NowPlayingItems items={this.state.nowPlaying}></NowPlayingItems>
-        </div>
+        <Slide items={this.state.images}></Slide>
+        <NowPlayingItems items={this.state.nowPlaying}></NowPlayingItems>
+        <ComingSoonItems items={this.state.comingSoon}></ComingSoonItems>
       </div>
     )
   }

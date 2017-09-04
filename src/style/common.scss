@@ -70,10 +70,33 @@ html, body {
     }
   }
 
+  .coming-soon {
+    @extend .now-playing;
+  }
+
   .movice-msg {
     width: 100%;
     height: 50px;
     background-color: #ccc;
+  }
+
+  .coming-movice-msg {
+    @extend .movice-msg;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    &:after {
+      @include cleanFloat;
+    }
+
+    .msg-left {
+      float: left;
+    }
+
+    .msg-right {
+      float: right;
+    }
   }
 
 }
