@@ -22,8 +22,29 @@ html, body {
 
 .header {
   width: 100%;
-  height: 100px;
-  background-color: aliceblue;
+  height: 50px;
+  background-color: #282828;
+  padding: 12px 4px;
+  box-sizing: border-box;
+  .menu-icon {
+    color: white;
+    position: relative;
+    float: left;
+  }
+  .maizuo-title {
+    color: #efefef;
+    margin-left: 20px;
+    float: left;
+  }
+  .maizuo-user {
+    float: right;
+    color: white;
+  }
+  .maizuo-city {
+    float: right;
+    color: #efefef;
+    margin-right: 20px;
+  }
 }
 
 .slide {
@@ -67,6 +88,22 @@ html, body {
     box-sizing: border-box;
     img {
       width: 100%;
+    }
+  }
+
+  .show-more {
+    text-align: center;
+    .more-button {
+      display: inline-block;
+      width: 160px;
+      background-color: #eee;
+      border-radius: 15px;
+      height: 30px;
+      line-height: 32px;
+      font-size: 12px;
+      color: #616161;
+      border: 1px solid #aaa;
+      cursor: pointer;
     }
   }
 

@@ -21,6 +21,9 @@ export default props => {
           </div>
         ))
       }
+      <div className="show-more">
+        <div className="more-button">更多即将上映电影</div>
+      </div>
     </div>
   )
 }

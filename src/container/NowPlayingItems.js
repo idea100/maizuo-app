@@ -18,6 +18,9 @@ export default props => {
         </div>
       ))
     }
+    <div className="show-more">
+      <div className="more-button">更多热印电影</div>
+    </div>
   </div>
   )
 }
