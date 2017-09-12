@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import Content from './content'
-import City from '@/pages/citys'
+import Content from '@/pages/root/content'
+import City from '@/pages/citys/city'
+
 import {
   BrowserRouter as Router,
   Route,
