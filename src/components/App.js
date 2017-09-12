@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Header from './header'
 import Content from './content'
+import City from '@/pages/citys'
 import {
   BrowserRouter as Router,
   Route,
@@ -12,9 +12,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <Header></Header>
-          <Route path="/" component={Content}></Route>
+        <div>
+          <Route exact path="/" component={ Content }></Route>
+          <Route path="/citys/" component={ City }></Route>
         </div>
       </Router>
     )
