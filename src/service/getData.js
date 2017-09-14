@@ -12,10 +12,14 @@ const fetchComingSoon = (data = {page: 1, count: 3}) => fetch('GET', 'v4/api/fil
 // 获取城市列表
 const fetchCitys = () => fetch('GET', 'v4/api/city')
 
+// 设置所在城市的ID
+const postCityId = (id) => fetch('POST', `v4/api/city/${id}`)
+
 // exports
 export {
   fetchImages,
   fetchNowPlaying,
   fetchComingSoon,
-  fetchCitys
+  fetchCitys,
+  postCityId
 }

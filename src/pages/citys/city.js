@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Header from '@/pages/root/header'
-import { fetchCitys } from '@/service/getData'
+import { fetchCitys, postCityId } from '@/service/getData'
 import _ from 'lodash'
 import CityItem from '@/container/CityItem'
 
@@ -35,6 +35,12 @@ export default class Cities extends Component {
       const $body = document.getElementsByTagName('body')[0]
 
       $body.scrollTop = offsetTop
+    }
+
+    if (/^[A-Z]$/.test(key)) {
+      postCityId(item.id)
+        .then(resp => this.props.history.push('/'))
+        .catch(err => console.log(resp))
     }
   }
 
