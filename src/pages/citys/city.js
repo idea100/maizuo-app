@@ -11,6 +11,8 @@ export default class Cities extends Component {
     this.state = {
       citiesMap: {}
     }
+
+    this.onCityItemClick = this.onCityItemClick.bind(this)
   }
 
   componentDidMount () {
@@ -23,12 +25,23 @@ export default class Cities extends Component {
     this.setState({
       citiesMap: groupCities
     })
+  }
 
+  onCityItemClick (options) {
+    let { items, item, key, $el } = options
+
+    if (key === '按字母排序') {
+      const offsetTop = this['city_' + item.name].getOffsetTop()
+      const $body = document.getElementsByTagName('body')[0]
+
+      $body.scrollTop = offsetTop
+    }
   }
 
   render () {
     const pinyinArr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
     const citiesList = []
+    const sortPingyin = []
 
     pinyinArr.forEach(pinyin => {
       if (this.state.citiesMap[pinyin]) {
@@ -36,17 +49,27 @@ export default class Cities extends Component {
           key: pinyin,
           list: this.state.citiesMap[pinyin]
         })
+
+        sortPingyin.push({name: pinyin})
       }
     })
+
+    citiesList.unshift({key: '按字母排序', list: sortPingyin})
 
 
     return (
       <div className="cities">
         <Header {...this.props} title="选择城市"></Header>
+
         <section className="city-list">
           {
             citiesList.map(item => (
-              <CityItem key={item.key} index={item.key} items={item.list} />
+              <CityItem
+                ref={ ref => this['city_' + item.key] = ref }
+                onClick={ this.onCityItemClick }
+                key={ item.key }
+                index={ item.key }
+                items={ item.list } />
             ))
           }
         </section>
