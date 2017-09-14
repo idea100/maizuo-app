@@ -4,12 +4,14 @@ import { fetchCitys, postCityId } from '@/service/getData'
 import _ from 'lodash'
 import CityItem from '@/container/CityItem'
 
+
 export default class Cities extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      citiesMap: {}
+      citiesMap: {},
+      hotCities: []
     }
 
     this.onCityItemClick = this.onCityItemClick.bind(this)
@@ -23,8 +25,10 @@ export default class Cities extends Component {
     let groupCities = _.groupBy(cities, item => item.pinyin.substring(0, 1))
 
     this.setState({
-      citiesMap: groupCities
+      citiesMap: groupCities,
+      hotCities: cities.filter(item => /^(北京|上海|广州|深圳)$/.test(item.name))
     })
+
   }
 
   onCityItemClick (options) {
@@ -37,7 +41,7 @@ export default class Cities extends Component {
       $body.scrollTop = offsetTop
     }
 
-    if (/^[A-Z]$/.test(key)) {
+    if (/^[A-Z]$/.test(key) || key === '热门城市') {
       postCityId(item.id)
         .then(resp => this.props.history.push('/'))
         .catch(err => console.log(resp))
@@ -61,7 +65,7 @@ export default class Cities extends Component {
     })
 
     citiesList.unshift({key: '按字母排序', list: sortPingyin})
-
+    citiesList.unshift({key: '热门城市', list: this.state.hotCities})
 
     return (
       <div className="cities">
