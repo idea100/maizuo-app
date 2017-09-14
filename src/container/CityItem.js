@@ -6,11 +6,11 @@ export default props => {
 
   return (
     <div>
-      <div>{ index }</div>
-      <ul>
+      <div className="city-head">{ index }</div>
+      <ul className="city-ul">
       {
         items.map((item, index) => (
-          <li key={index}>{item.name}</li>
+          <li className="city-item" key={index}>{item.name}</li>
         ))
       }
       </ul>

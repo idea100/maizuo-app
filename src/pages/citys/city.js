@@ -41,9 +41,9 @@ export default class Cities extends Component {
 
 
     return (
-      <div>
+      <div className="cities">
         <Header {...this.props} title="选择城市"></Header>
-        <section className="">
+        <section className="city-list">
           {
             citiesList.map(item => (
               <CityItem key={item.key} index={item.key} items={item.list} />

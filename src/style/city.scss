@@ -1,0 +1,32 @@
+.cities {
+  background-color: #ebebeb;
+
+  .city-list {
+    ol, ul, li {
+      @include listNone;
+    }
+  }
+
+  .city-item {
+    display: inline-block;
+    width: 25%;
+    box-sizing: border-box;
+    text-align: center;
+    color: #838383;
+    font-size: 16px;
+    line-height: 46px;
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .city-ul {
+    background-color: white;
+  }
+
+  .city-head {
+    padding-left: 15px;
+    font-size: 14px;
+    line-height: 40px;
+    background-color: #ebebeb;
+    margin-top: -1px;
+  }
+}

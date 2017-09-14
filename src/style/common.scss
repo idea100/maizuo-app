@@ -14,6 +14,12 @@
   clear: both;
 }
 
+@mixin listNone {
+  list-style: none;
+  margin: 0;
+  padding:0;
+}
+
 html, body {
   @include super;
   font-family: sans-serif;
@@ -52,10 +58,8 @@ html, body {
   margin: auto;
 
   ol, ul, li {
-    list-style: none;
+    @include listNone;
     display: inline;
-    margin: 0;
-    padding:0;
   }
 
   .silder {
@@ -197,3 +201,5 @@ html, body {
     }
   }
 }
+
+@import './city.scss';
