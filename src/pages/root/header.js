@@ -7,7 +7,7 @@ export default class Header extends Component {
       <header className="header">
         <AlignJustify className="menu-icon" onClick={() => alert('you click menu')}/>
         <span className="maizuo-title">{this.props.title}</span>
-        <User className="maizuo-user"/>
+        <User className="maizuo-user" onClick={ () => this.props.history.push('/login') } />
         <span className="maizuo-city" onClick={ () => this.props.history.push('/citys') }>深圳</span>
       </header>
     )
