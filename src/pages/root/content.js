@@ -49,7 +49,7 @@ export default class Content extends Component {
   render () {
     return (
       <div className="App">
-        <Header {...this.props}></Header>
+        <Header {...this.props} title="卖座电影"></Header>
         <div className="slide">
           <Slide items={this.state.images}></Slide>
           <NowPlayingItems items={this.state.nowPlaying}></NowPlayingItems>

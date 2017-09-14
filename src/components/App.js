@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Content from '@/pages/root/content'
 import City from '@/pages/citys/city'
+import Login from '@/pages/login/login'
 
 import {
   BrowserRouter as Router,
@@ -15,7 +16,8 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path="/" component={ Content }></Route>
-          <Route path="/citys/" component={ City }></Route>
+          <Route path="/citys" component={ City }></Route>
+          <Route path="/login" component={ Login }></Route>
         </div>
       </Router>
     )
