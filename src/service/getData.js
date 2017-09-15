@@ -15,11 +15,19 @@ const fetchCitys = () => fetch('GET', 'v4/api/city')
 // 设置所在城市的ID
 const postCityId = (id) => fetch('POST', `v4/api/city/${id}`)
 
+// 获取登陆接口
+const postLoginId = data => fetch('POST', 'v4/api/login', data)
+
+// 发送登录验证码
+const postCodeing = data => fetch('POST', 'v4/api/code', data)
+
 // exports
 export {
   fetchImages,
   fetchNowPlaying,
   fetchComingSoon,
   fetchCitys,
-  postCityId
+  postCityId,
+  postLoginId,
+  postCodeing
 }

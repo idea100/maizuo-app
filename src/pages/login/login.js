@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import MD5 from 'md5'
+import { postLoginId, postCodeing } from '@/service/getData'
 
 import Header from '../root/header'
 import '@/style/login.scss'
@@ -20,6 +22,7 @@ export default class Login extends Component {
 
 		this.handleChange = this.handleChange.bind(this)
 		this.sendCode = this.sendCode.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
 	handleChange (event, name) {
@@ -27,7 +30,7 @@ export default class Login extends Component {
 			[name]: event.target.value
 		})
 
-		if(name === 'userName') {
+		if (name === 'userName') {
 			this.isShowSmsCode(event)
 		}
 	}
@@ -59,14 +62,74 @@ export default class Login extends Component {
 				codeTip: codeTipMsg
 			})
          }, 1000)
+
+		postCodeing({
+			mobile: this.state.userName,
+			type: "2"
+		})
+		.then(resp => console.log(resp))
+        .catch(err => console.log(err))
+	}
+
+	handleSubmit (event) {
+		let msg = this.validSubmitMsg()
+
+		if (!!msg) {
+			this.setState({
+				errorMsg: msg
+			})
+
+			return;
+		}
+
+		postLoginId({
+			code: "",
+			codeKey: "",
+			loginType: 1,
+			username: this.state.userName,
+			password: MD5(this.state.passWord)
+		})
+		.then(resp => this.callComit(resp))
+        .catch(err => console.log(err))
+
+		event.preventDefault()
+	}
+
+	validSubmitMsg () {
+		let msg = ''
+		switch (true) {
+			case !this.state.userName:
+				msg = '手机号或者邮箱不能为空'
+				break
+			case !/^1[34578]\d{9}$/.test(this.state.userName):
+				msg = '请输入正确的手机号或邮箱'
+				break
+			case !this.state.passWord:
+				msg = '密码不能为空'
+				break
+		}
+
+		return msg
+	}
+
+	callComit (resp) {
+		if (resp.msg !== 'ok') {
+			this.setState({
+				errorMsg: resp.msg
+			})
+
+			return
+		}
+
+		alert('登陆成功')
 	}
 
 	render () {
 		return (
 			<div className="App">
-				<Header {...this.props} title="卖座电影"></Header>
+				<Header {...this.props} title="登录"></Header>
 				<div className="login-form">
-					<form>
+					<form onSubmit={this.handleSubmit}>
 						<div className="form-group">
 							<input type="text" placeholder="输入手机号/邮箱" value={this.state.userName} onChange={e => this.handleChange(e, 'userName')}/>
 							<div className="input-bg"></div>
