@@ -6,8 +6,11 @@ import Slide from '@/container/Slide'
 import ComingSoonItems from '@/container/ComingSoonItems'
 import Header from './header'
 
+import { connect } from 'react-redux'
+import { fetchImagesAsync } from '@/actions'
 
-export default class Content extends Component {
+
+class Content extends Component {
   constructor(props) {
     super(props)
 
@@ -19,10 +22,10 @@ export default class Content extends Component {
   }
 
   componentDidMount () {
-    fetchImages()
-      .then(resp =>
-          this.setState({images: this.formatterImages(resp.data.billboards)}))
-      .catch(err => console.log(err))
+    // fetchImages()
+    //   .then(resp =>
+    //       this.setState({images: this.formatterImages(resp.data.billboards)}))
+    //   .catch(err => console.log(err))
 
     fetchNowPlaying()
       .then(resp =>
@@ -34,16 +37,19 @@ export default class Content extends Component {
         this.setState({comingSoon: resp.data.films}))
       .catch(err => console.log(err))
 
+    const { dispatch } = this.props
+    dispatch(fetchImagesAsync('posts'))
+
   }
 
   formatterImages (array) {
-    if (Array.isArray(array)) {
+    if (Array.isArray(array) && array.length > 0) {
       while (array.length < 3) {
         array.push(array[0])
       }
     }
 
-    return array
+    return array || []
   }
 
   render () {
@@ -51,7 +57,7 @@ export default class Content extends Component {
       <div className="App">
         <Header {...this.props} title="卖座电影"></Header>
         <div className="slide">
-          <Slide items={this.state.images}></Slide>
+          <Slide items={this.formatterImages(this.props.posts.posts)}></Slide>
           <NowPlayingItems items={this.state.nowPlaying}></NowPlayingItems>
           <ComingSoonItems items={this.state.comingSoon}></ComingSoonItems>
         </div>
@@ -59,3 +65,14 @@ export default class Content extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  const { getImages } = state
+  console.log(state)
+  return {
+    posts: getImages.posts || {}
+  }
+}
+
+
+export default connect(mapStateToProps)(Content)
