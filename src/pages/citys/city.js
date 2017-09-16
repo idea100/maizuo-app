@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Header from '@/container/header'
-import { fetchCitys, postCityId } from '@/service/getData'
+import { postCityId } from '@/service/getData'
 import _ from 'lodash'
 import CityItem from '@/components/CityItem'
 
@@ -9,26 +9,20 @@ export default class Cities extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      citiesMap: {},
-      hotCities: []
-    }
-
     this.onCityItemClick = this.onCityItemClick.bind(this)
   }
 
   componentDidMount () {
-    fetchCitys().then(resp => this.formatterCities(resp.data.cities))
+    this.props.fetchCities()
   }
 
-  formatterCities(cities = []) {
+  formatterCities (cities = []) {
     let groupCities = _.groupBy(cities, item => item.pinyin.substring(0, 1))
 
-    this.setState({
+    return {
       citiesMap: groupCities,
       hotCities: cities.filter(item => /^(北京|上海|广州|深圳)$/.test(item.name))
-    })
-
+    }
   }
 
   onCityItemClick (options) {
@@ -52,12 +46,16 @@ export default class Cities extends Component {
     const pinyinArr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
     const citiesList = []
     const sortPingyin = []
+    const {
+      citiesMap,
+      hotCities
+    } = this.formatterCities(this.props.cities)
 
     pinyinArr.forEach(pinyin => {
-      if (this.state.citiesMap[pinyin]) {
+      if (citiesMap[pinyin]) {
         citiesList.push({
           key: pinyin,
-          list: this.state.citiesMap[pinyin]
+          list: citiesMap[pinyin]
         })
 
         sortPingyin.push({name: pinyin})
@@ -65,11 +63,11 @@ export default class Cities extends Component {
     })
 
     citiesList.unshift({key: '按字母排序', list: sortPingyin})
-    citiesList.unshift({key: '热门城市', list: this.state.hotCities})
+    citiesList.unshift({key: '热门城市', list: hotCities})
 
     return (
       <div className="cities">
-        <Header {...this.props} title="选择城市"></Header>
+        <Header {...this.props} title="选择城市"/>
 
         <section className="city-list">
           {
