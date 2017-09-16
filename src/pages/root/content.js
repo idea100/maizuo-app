@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { fetchImages, fetchNowPlaying, fetchComingSoon } from '@/service/getData'
 
 import NowPlayingItems from '@/container/nowPlayingItems'
 import Slide from '@/container/Slide'
@@ -7,7 +6,7 @@ import ComingSoonItems from '@/container/ComingSoonItems'
 import Header from './header'
 
 import { connect } from 'react-redux'
-import { fetchImagesAsync } from '@/actions'
+import { fetchImagesAsync, fetchNowPlayingAsync, fetchComingSoonAsync } from '@/actions'
 
 
 class Content extends Component {
@@ -22,23 +21,10 @@ class Content extends Component {
   }
 
   componentDidMount () {
-    // fetchImages()
-    //   .then(resp =>
-    //       this.setState({images: this.formatterImages(resp.data.billboards)}))
-    //   .catch(err => console.log(err))
-
+    const { fetchImages, fetchNowPlaying, fetchComingSoon } = this.props
+    fetchImages()
     fetchNowPlaying()
-      .then(resp =>
-          this.setState({nowPlaying: resp.data.films}))
-      .catch(err => console.log(err))
-
     fetchComingSoon()
-      .then(resp =>
-        this.setState({comingSoon: resp.data.films}))
-      .catch(err => console.log(err))
-
-    const { dispatch } = this.props
-    dispatch(fetchImagesAsync('posts'))
 
   }
 
@@ -57,9 +43,9 @@ class Content extends Component {
       <div className="App">
         <Header {...this.props} title="卖座电影"></Header>
         <div className="slide">
-          <Slide items={this.formatterImages(this.props.posts.posts)}></Slide>
-          <NowPlayingItems items={this.state.nowPlaying}></NowPlayingItems>
-          <ComingSoonItems items={this.state.comingSoon}></ComingSoonItems>
+          <Slide items={this.formatterImages(this.props.images)}></Slide>
+          <NowPlayingItems items={this.props.nowPlaying}></NowPlayingItems>
+          <ComingSoonItems items={this.props.comingSoon}></ComingSoonItems>
         </div>
       </div>
     )
@@ -67,12 +53,28 @@ class Content extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { getImages } = state
-  console.log(state)
+  const { images, nowPlaying, comingSoon } = state
   return {
-    posts: getImages.posts || {}
+    images: images.resp || [],
+    nowPlaying: nowPlaying.resp || [],
+    comingSoon: comingSoon.resp || []
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchImages: () => {
+      dispatch(fetchImagesAsync())
+    },
+    fetchNowPlaying: () => {
+      dispatch(fetchNowPlayingAsync())
+    },
+    fetchComingSoon: () => {
+      dispatch(fetchComingSoonAsync())
+    }
   }
 }
 
 
-export default connect(mapStateToProps)(Content)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content)

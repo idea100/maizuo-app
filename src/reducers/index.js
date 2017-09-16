@@ -1,38 +1,43 @@
 import { combineReducers } from 'redux'
-import { REQUEST_POSTS, RECEIVE_POSTS } from '@/actions'
+import {
+  REQUEST_POSTS_IMAGE,
+  RECEIVE_POSTS_IMAGE,
+  RECEIVE_POSTS_NOW_PLAYING,
+  REQUEST_POSTS_NOW_PLAYING,
+  REQUEST_POSTS_COMING_SOON,
+  RECEIVE_POSTS_COMING_SOON
+} from '@/actions'
 
-const posts = (state = {
-  isFetching: false,
-  didInvalidate: false,
-  posts: []
-}, action) => {
+const images = (state = {}, action) => {
   switch (action.type) {
-    case REQUEST_POSTS:
+    case REQUEST_POSTS_IMAGE:
+    case RECEIVE_POSTS_IMAGE:
       return {
-        ...state,
-        isFetching: true,
-        didInvalidate: false
-      }
-    case RECEIVE_POSTS:
-      return {
-        ...state,
-        isFetching: false,
-        didInvalidate: false,
-        posts: action.posts,
-        lastUpdated: action.receivedAt
+        resp: action.resp
       }
     default:
       return state
   }
 }
 
-const getImages = (state = {}, action) => {
+const nowPlaying = (state = {}, action) => {
   switch (action.type) {
-    case RECEIVE_POSTS:
-    case REQUEST_POSTS:
+    case RECEIVE_POSTS_NOW_PLAYING:
+    case REQUEST_POSTS_NOW_PLAYING:
       return {
-        ...state,
-        [action.reddit]: posts(state[action.reddit], action)
+        resp: action.resp
+      }
+    default:
+      return state
+  }
+}
+
+const comingSoon = (state = {}, action) => {
+  switch (action.type) {
+    case REQUEST_POSTS_COMING_SOON:
+    case RECEIVE_POSTS_COMING_SOON:
+      return {
+        resp: action.resp
       }
     default:
       return state
@@ -40,7 +45,9 @@ const getImages = (state = {}, action) => {
 }
 
 const rootReducer = combineReducers({
-  getImages
+  images,
+  nowPlaying,
+  comingSoon
 })
 
 export default rootReducer
