@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import MD5 from 'md5'
 import { postLoginId, postCodeing } from '@/service/getData'
 
-import Header from '../root/header'
+import Header from '@/container/header'
 import '@/style/login.scss'
 
 export default class Login extends Component {

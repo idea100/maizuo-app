@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 
-import NowPlayingItems from '@/container/nowPlayingItems'
-import Slide from '@/container/Slide'
-import ComingSoonItems from '@/container/ComingSoonItems'
-import Header from './header'
-
-import { connect } from 'react-redux'
-import { fetchImagesAsync, fetchNowPlayingAsync, fetchComingSoonAsync } from '@/actions'
+import NowPlayingItems from '@/components/nowPlayingItems'
+import Slide from '@/components/Slide'
+import ComingSoonItems from '@/components/ComingSoonItems'
+import Header from '@/container/header'
 
 
-class Content extends Component {
+export default class Content extends Component {
   constructor(props) {
     super(props)
 
@@ -51,30 +48,3 @@ class Content extends Component {
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  const { images, nowPlaying, comingSoon } = state
-  return {
-    images: images.resp || [],
-    nowPlaying: nowPlaying.resp || [],
-    comingSoon: comingSoon.resp || []
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchImages: () => {
-      dispatch(fetchImagesAsync())
-    },
-    fetchNowPlaying: () => {
-      dispatch(fetchNowPlayingAsync())
-    },
-    fetchComingSoon: () => {
-      dispatch(fetchComingSoonAsync())
-    }
-  }
-}
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Content)

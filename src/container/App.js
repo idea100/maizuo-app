@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import Content from '@/pages/root/content'
+import Content from '@/pages/root'
 import City from '@/pages/citys/city'
 import Login from '@/pages/login/login'
 
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 
 class App extends Component {
