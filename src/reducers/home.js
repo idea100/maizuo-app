@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import { createActions, handleActions, combineActions } from 'redux-actions'
 import { fetchImages, fetchNowPlaying, fetchComingSoon } from '@/service/getData'
 
@@ -10,54 +9,50 @@ const {
   requestPostsComingSoon,
   receivePostsComingSoon
 } = createActions({
-  'REQUEST_POSTS_IMAGE': () => ({}),
-  'RECEIVE_POSTS_IMAGE': resp => ({resp}),
-  'REQUEST_POSTS_NOW_PLAYING': () => ({}),
-  'RECEIVE_POSTS_NOW_PLAYING': resp => ({resp}),
-  'REQUEST_POSTS_COMING_SOON': () => ({}),
-  'RECEIVE_POSTS_COMING_SOON': resp => ({resp})
+  'REQUEST_POSTS_IMAGE': key => ({key}),
+  'RECEIVE_POSTS_IMAGE': (key, resp) => ({key, resp}),
+  'REQUEST_POSTS_NOW_PLAYING': key => ({key}),
+  'RECEIVE_POSTS_NOW_PLAYING': (key, resp) => ({key, resp}),
+  'REQUEST_POSTS_COMING_SOON': key => ({key}),
+  'RECEIVE_POSTS_COMING_SOON': (key, resp) => ({key, resp})
 })
 
 export const fetchImagesAsync = () => dispatch => {
-  dispatch(requestPostsImage())
+  dispatch(requestPostsImage('images'))
 
   return fetchImages()
-    .then(resp => dispatch(receivePostsImage(resp.data.billboards)))
+    .then(resp => dispatch(receivePostsImage('images', resp.data.billboards)))
     .catch(err => console.log(err))
 }
 
 export const fetchNowPlayingAsync = () => dispatch => {
-  dispatch(requestPostsNowPlaying())
+  dispatch(requestPostsNowPlaying('nowPlaying'))
 
   return fetchNowPlaying()
-    .then(resp => dispatch(receivePostsNowPlaying(resp.data.films)))
+    .then(resp => dispatch(receivePostsNowPlaying('nowPlaying', resp.data.films)))
     .catch(err => console.log(err))
 }
 
 export const fetchComingSoonAsync = () => dispatch => {
-  dispatch(requestPostsComingSoon())
+  dispatch(requestPostsComingSoon('comingSoon'))
 
   return fetchComingSoon()
-    .then(resp => dispatch(receivePostsComingSoon(resp.data.films)))
+    .then(resp => dispatch(receivePostsComingSoon('comingSoon', resp.data.films)))
     .catch(err => console.log(err))
 }
 
-
-export default combineReducers({
-  images: handleActions({
-    [combineActions(requestPostsImage, receivePostsImage)](state, { payload: { resp } }) {
-      return { ...state, resp };
+export default handleActions({
+  [combineActions(
+    requestPostsImage,
+    receivePostsImage,
+    requestPostsNowPlaying,
+    receivePostsNowPlaying,
+    requestPostsComingSoon,
+    receivePostsComingSoon
+  )]( state, { payload: { key, resp } } ) {
+    return {
+      ...state,
+      [key]: resp
     }
-  }, {}),
-  nowPlaying: handleActions({
-    [combineActions(requestPostsNowPlaying, receivePostsNowPlaying)](state, { payload: { resp } }) {
-      return { ...state, resp };
-    }
-  }, {}),
-  comingSoon: handleActions({
-    [combineActions(requestPostsComingSoon, receivePostsComingSoon)](state, { payload: { resp } }) {
-      return { ...state, resp };
-    }
-  }, {})
-})
-
+  }
+}, {images: [], nowPlaying: [], comingSoon: []})

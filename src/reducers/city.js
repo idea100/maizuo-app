@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import { createActions, handleActions, combineActions } from 'redux-actions'
 import { fetchCitys } from '@/service/getData'
 
@@ -6,24 +5,28 @@ const {
   requestPostsCities,
   receivePostsCities,
 } = createActions({
-  'REQUEST_POSTS_CITIES': () => ({}),
-  'RECEIVE_POSTS_CITIES': resp => ({resp})
+  'REQUEST_POSTS_CITIES': key => ({key}),
+  'RECEIVE_POSTS_CITIES': (key, resp) => ({key, resp})
 })
 
 export const fetchCitiesAsync = () => dispatch => {
-  dispatch(requestPostsCities())
+  dispatch(requestPostsCities('cities'))
 
   return fetchCitys()
-    .then(resp => dispatch(receivePostsCities(resp.data.cities)))
+    .then(resp => dispatch(receivePostsCities('cities', resp.data.cities)))
     .catch(err => console.log(err))
 }
 
-
-export default combineReducers({
-  cities: handleActions({
-    [combineActions(requestPostsCities, receivePostsCities)](state, { payload: { resp } }) {
-      return { ...state, resp };
+export default handleActions({
+  [combineActions(
+    requestPostsCities,
+    receivePostsCities
+  )]( state, { payload: { key, resp } } ) {
+    return {
+      ...state,
+      [key]: resp
     }
-  }, {})
-})
+  }
+}, { cities: [] })
+
 
