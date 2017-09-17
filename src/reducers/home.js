@@ -2,53 +2,41 @@ import { createActions, handleActions, combineActions } from 'redux-actions'
 import { fetchImages, fetchNowPlaying, fetchComingSoon } from '@/service/getData'
 
 const {
-  requestPostsImage,
-  receivePostsImage,
-  requestPostsNowPlaying,
-  receivePostsNowPlaying,
-  requestPostsComingSoon,
-  receivePostsComingSoon
+  requestPostsDataHome,
+  receivePostsDataHome
 } = createActions({
-  'REQUEST_POSTS_IMAGE': key => ({key}),
-  'RECEIVE_POSTS_IMAGE': (key, resp) => ({key, resp}),
-  'REQUEST_POSTS_NOW_PLAYING': key => ({key}),
-  'RECEIVE_POSTS_NOW_PLAYING': (key, resp) => ({key, resp}),
-  'REQUEST_POSTS_COMING_SOON': key => ({key}),
-  'RECEIVE_POSTS_COMING_SOON': (key, resp) => ({key, resp})
+  'REQUEST_POSTS_DATA_HOME': key => ({key}),
+  'RECEIVE_POSTS_DATA_HOME': (key, resp) => ({key, resp})
 })
 
 export const fetchImagesAsync = () => dispatch => {
-  dispatch(requestPostsImage('images'))
+  dispatch(requestPostsDataHome('images'))
 
   return fetchImages()
-    .then(resp => dispatch(receivePostsImage('images', resp.data.billboards)))
+    .then(resp => dispatch(receivePostsDataHome('images', resp.data.billboards)))
     .catch(err => console.log(err))
 }
 
 export const fetchNowPlayingAsync = () => dispatch => {
-  dispatch(requestPostsNowPlaying('nowPlaying'))
+  dispatch(requestPostsDataHome('nowPlaying'))
 
   return fetchNowPlaying()
-    .then(resp => dispatch(receivePostsNowPlaying('nowPlaying', resp.data.films)))
+    .then(resp => dispatch(receivePostsDataHome('nowPlaying', resp.data.films)))
     .catch(err => console.log(err))
 }
 
 export const fetchComingSoonAsync = () => dispatch => {
-  dispatch(requestPostsComingSoon('comingSoon'))
+  dispatch(requestPostsDataHome('comingSoon'))
 
   return fetchComingSoon()
-    .then(resp => dispatch(receivePostsComingSoon('comingSoon', resp.data.films)))
+    .then(resp => dispatch(receivePostsDataHome('comingSoon', resp.data.films)))
     .catch(err => console.log(err))
 }
 
 export default handleActions({
   [combineActions(
-    requestPostsImage,
-    receivePostsImage,
-    requestPostsNowPlaying,
-    receivePostsNowPlaying,
-    requestPostsComingSoon,
-    receivePostsComingSoon
+    requestPostsDataHome,
+    receivePostsDataHome
   )]( state, { payload: { key, resp } } ) {
     return {
       ...state,
