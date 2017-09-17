@@ -21,3 +21,5 @@ export const postLogin = data => fetch('POST', 'v4/api/login', data)
 // 发送登录验证码
 export const fetchVerifyCode = (mobile = '', type = '2') => fetch('POST', 'v4/api/code', { mobile, type })
 
+// 获取用户信息
+export const fetchUserInfo = () => fetch('GET', 'v4/api/me')

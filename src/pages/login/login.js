@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Header from '@/container/header'
-import { postLogin, fetchVerifyCode } from '@/service/getData'
+import { postLogin, fetchVerifyCode, fetchUserInfo } from '@/service/getData'
 import MD5 from 'md5'
 
 export default class Login extends Component {
@@ -28,6 +28,7 @@ export default class Login extends Component {
       loginType: /^\d{6}$/.test(password) ? 1 : 0,
     }).then(resp => {
       this.props.onLoginSuccess(resp.data.data)
+      fetchUserInfo().then(resp => console.log(resp), err => console.log(err))
     }).catch(err => console.log(err))
   }
 

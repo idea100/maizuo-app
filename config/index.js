@@ -33,6 +33,9 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/api/' : '/'
+        },
+        cookieDomainRewrite:{
+          '*':'localhost' // 把相应的 cookie 域都设置成 localhost
         }
       }
     },
