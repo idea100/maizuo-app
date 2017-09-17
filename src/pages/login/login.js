@@ -1,152 +1,78 @@
 import React, { Component } from 'react'
-import MD5 from 'md5'
-import { postLoginId, postCodeing } from '@/service/getData'
-
 import Header from '@/container/header'
-import '@/style/login.scss'
+import { postLogin, fetchVerifyCode } from '@/service/getData'
+import MD5 from 'md5'
 
 export default class Login extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			userName: '',
-			passWord: '',
-			errorMsg: '',
-			codeTip: {
-				text: '发送验证码',
-				count: 60
-			},
-			display: 'none'
-		}
-		this.timer = ''
+  constructor (props) {
+    super(props)
+    this.onSubmitClick = this.onSubmitClick.bind(this)
+    this.onUserNameInput = this.onUserNameInput.bind(this)
+    this.onPasswordInout = this.onPasswordInout.bind(this)
+    this.onVerifyBtnClick = this.onVerifyBtnClick.bind(this)
 
-		this.handleChange = this.handleChange.bind(this)
-		this.sendCode = this.sendCode.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
-	}
+    this.state = {
+      username: '13500000000',
+      password: '422509',
+      sendVerifyCode: false
+    }
+  }
 
-	handleChange (event, name) {
-		this.setState({
-			[name]: event.target.value
-		})
+  onSubmitClick (e) {
+    const { username, password } = this.state
+    postLogin({
+      username,
+      password: MD5(password),
+      code: '',
+      codeKey: '',
+      loginType: /^\d{6}$/.test(password) ? 1 : 0,
+    }).then(resp => {
+      this.props.onLoginSuccess(resp.data.data)
+    }).catch(err => console.log(err))
+  }
 
-		if (name === 'userName') {
-			this.isShowSmsCode(event)
-		}
-	}
+  onUserNameInput (e) {
+    this.setState({username: e.target.value})
+  }
 
-	isShowSmsCode (event) {
-		this.setState({
-			display: /^1[34578]\d{9}$/.test(event.target.value) ? 'block' : 'none'
-		})
-	}
+  onPasswordInout (e) {
+    this.setState({password: e.target.value})
+  }
 
-	sendCode (event) {
-		let codeTipMsg = this.state.codeTip
+  onVerifyBtnClick (e) {
+    if (this.state.sendVerifyCode) {
+      return
+    }
 
-		if(!!this.timer) {
-			return;
-		}
+    this.setState({sendVerifyCode: true})
 
-		this.timer = setInterval(() => {
-            codeTipMsg.count -= 1
+    fetchVerifyCode(this.state.username)
+      .then(resp => this.setState({sendVerifyCode: true}))
+      .catch(err => this.setState({sendVerifyCode: false}))
+  }
 
-            if (codeTipMsg.count < 1) {
-				codeTipMsg.count = 60
-				clearInterval(this.timer)
-				this.timer = ''
-            }
+  render () {
+    return (
+      <div className="cities">
+        <Header {...this.props} title="登录"/>
+        <div className="login">
+          <div className="login-form">
+            <div className="login-row login-row-input">
+              <input defaultValue={this.state.username} onInput={ this.onUserNameInput } className="login-input" type="text" placeholder="输入手机号/邮箱"/>
+              {
+                /^1[3578]\d{9}$/.test(this.state.username) ? <div onClick={ this.onVerifyBtnClick } className="login-verify-btn">{this.state.sendVerifyCode ? '已发送' : '发送验证码'}</div> : ''
+              }
+            </div>
+            <div className="login-row login-row-input">
+              <input defaultValue={this.state.password} onInput={ this.onPasswordInout } className="login-input" type="password" placeholder="输入密码/验证码"/>
+            </div>
+            <div className="login-row">
+              <button onClick={ this.onSubmitClick } className="login-center login-button">登录</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
 
-            codeTipMsg.text = codeTipMsg.count !== 60 ? `重发(${codeTipMsg.count})` : '发送验证码'
-            this.setState({
-				codeTip: codeTipMsg
-			})
-         }, 1000)
-
-		postCodeing({
-			mobile: this.state.userName,
-			type: "2"
-		})
-		.then(resp => console.log(resp))
-        .catch(err => console.log(err))
-	}
-
-	handleSubmit (event) {
-		let msg = this.validSubmitMsg()
-
-		if (!!msg) {
-			this.setState({
-				errorMsg: msg
-			})
-
-			return;
-		}
-
-		postLoginId({
-			code: "",
-			codeKey: "",
-			loginType: 1,
-			username: this.state.userName,
-			password: MD5(this.state.passWord)
-		})
-		.then(resp => this.callComit(resp))
-        .catch(err => console.log(err))
-
-		event.preventDefault()
-	}
-
-	validSubmitMsg () {
-		let msg = ''
-		switch (true) {
-			case !this.state.userName:
-				msg = '手机号或者邮箱不能为空'
-				break
-			case !/^1[34578]\d{9}$/.test(this.state.userName):
-				msg = '请输入正确的手机号或邮箱'
-				break
-			case !this.state.passWord:
-				msg = '密码不能为空'
-				break
-		}
-
-		return msg
-	}
-
-	callComit (resp) {
-		if (resp.msg !== 'ok') {
-			this.setState({
-				errorMsg: resp.msg
-			})
-
-			return
-		}
-
-		alert('登陆成功')
-	}
-
-	render () {
-		return (
-			<div className="App">
-				<Header {...this.props} title="登录"></Header>
-				<div className="login-form">
-					<form onSubmit={this.handleSubmit}>
-						<div className="form-group">
-							<input type="text" placeholder="输入手机号/邮箱" value={this.state.userName} onChange={e => this.handleChange(e, 'userName')}/>
-							<div className="input-bg"></div>
-							<span className="sms-code" style={{'display':this.state.display}} onClick={this.sendCode}>
-								<i className="sms-code-tip"></i>
-								<i className="sms-code-text">{this.state.codeTip.text}</i>
-							</span>
-						</div>
-						<div className="form-group">
-							<input type="text" placeholder="输入密码/验证码" value={this.state.passWord} onChange={e => this.handleChange(e, 'passWord')}/>
-							<div className="input-bg"></div>
-						</div>
-						<span className="error-msg">{this.state.errorMsg}</span>
-						<button type="submit">登录</button>
-					</form>
-				</div>
-			</div>
-		)
-	}
+  }
 }

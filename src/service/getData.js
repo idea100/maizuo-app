@@ -16,8 +16,8 @@ export const fetchCitys = () => fetch('GET', 'v4/api/city')
 export const postCityId = id => fetch('POST', `v4/api/city/${id}`)
 
 // 获取登陆接口
-export const postLoginId = data => fetch('POST', 'v4/api/login', data)
+export const postLogin = data => fetch('POST', 'v4/api/login', data)
 
 // 发送登录验证码
-export const postCodeing = data => fetch('POST', 'v4/api/code', data)
+export const fetchVerifyCode = (mobile = '', type = '2') => fetch('POST', 'v4/api/code', { mobile, type })
 

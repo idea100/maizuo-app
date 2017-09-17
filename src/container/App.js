@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Content from '@/pages/root'
 import City from '@/pages/citys'
-import Login from '@/pages/login/login'
+import Login from '@/pages/login'
 
 import {
   BrowserRouter as Router,
