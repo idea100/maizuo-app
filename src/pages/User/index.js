@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { fetchUserInfoAsync } from '@/reducers/user'
 
 const mapStateToProps = (state) => {
-  const { userInfo } = state
-  return { userInfo }
+  const { user } = state
+
+  return { userInfo: user.userInfo || {} }
 }
 
 const mapDispatchToProps = (dispatch) => {
