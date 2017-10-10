@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import Header from '@/container/header'
+import { fetchLogout } from '@/service/getData'
 
 export default class User extends Component {
   constructor (props) {
     super(props)
+    this.onLogout = this.onLogout.bind(this)
   }
 
   componentDidMount () {
     this.props.fetchUserInfo()
+  }
+
+  onLogout () {
+    fetchLogout().then(resp => {
+      this.props.history.push('/login')
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   render () {
@@ -23,7 +33,7 @@ export default class User extends Component {
             <div className="detail-line">{userInfo.name}</div>
             <div className="detail-line detail-id">ID:{userInfo.id}</div>
             <div className="detail-line detail-logout">
-              <a href="#">退出</a>
+              <a href="#" onClick={this.onLogout}>退出</a>
             </div>
           </div>
         </div>

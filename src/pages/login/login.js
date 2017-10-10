@@ -28,6 +28,7 @@ export default class Login extends Component {
       loginType: /^\d{6}$/.test(password) ? 1 : 0,
     }).then(resp => {
       this.props.onLoginSuccess(resp.data.data)
+      this.props.history.push('/user')
     }).catch(err => console.log(err))
   }
 
