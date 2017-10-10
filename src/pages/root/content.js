@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import NowPlayingItems from '@/components/nowPlayingItems'
+import NowPlayingItems from '@/components/NowPlayingItems'
 import Slide from '@/components/Slide'
 import ComingSoonItems from '@/components/ComingSoonItems'
 import Header from '@/container/header'
