@@ -36,6 +36,81 @@ export default class User extends Component {
               <a href="#" onClick={this.onLogout}>退出</a>
             </div>
           </div>
+
+        </div>
+
+        <div className="user-list">
+          <div className="user-list-item">
+            <div className="user-list-line">
+              <i className="iconfont icon-ticket-filled xxx1"></i>
+              <span className="title">影票订单</span>
+              <div className="pull-right">
+                0张
+              </div>
+            </div>
+          </div>
+
+          <div className="user-list-item">
+            <div className="user-list-line">
+              <i className="iconfont icon-sandglass-filled xxx2"></i>
+              <span className="title">影票待付订单</span>
+              <div className="pull-right">
+                0张
+              </div>
+            </div>
+          </div>
+
+          <div className="user-list-item">
+            <div className="user-list-line">
+              <i className="iconfont icon-mall-filled xxx3"></i>
+              <span className="title">影票订单</span>
+              <div className="pull-right">
+                0张
+              </div>
+            </div>
+          </div>
+
+          <div className="user-list-item">
+            <div className="user-list-line">
+              <i className="iconfont icon-coupon-filled xxx4"></i>
+              <span className="title">影票订单</span>
+              <div className="pull-right">
+                0张
+              </div>
+            </div>
+          </div>
+
+          <div className="user-list-item">
+            <div className="user-list-line">
+              <i className="iconfont icon-card-filled  xxx5"></i>
+              <span className="title">影票订单</span>
+              <div className="pull-right">
+                0张
+              </div>
+            </div>
+          </div>
+
+          <div className="user-list-item">
+            <div className="user-list-line">
+              <i className="iconfont icon-ticket-filled xxx6"></i>
+              <span className="title">影票订单</span>
+              <div className="pull-right">
+                0张
+              </div>
+            </div>
+          </div>
+
+          <div className="user-list-item">
+            <div className="user-list-line">
+              <i className="iconfont icon-setting-filled xxx7"></i>
+              <span className="title">影票订单</span>
+              <div className="pull-right">
+                0张
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
     )
