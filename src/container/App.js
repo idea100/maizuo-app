@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Content from '@/pages/root'
 import City from '@/pages/citys'
 import Login from '@/pages/login'
+import User from '@/pages/User'
 
 import {
   Router,
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/" component={ Content }></Route>
             <Route path="/citys" component={ City }></Route>
             <Route path="/login" component={ Login }></Route>
+            <Route path="/user" component={ User }></Route>
           </div>
         </Router>
       </Provider>
