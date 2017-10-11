@@ -23,6 +23,10 @@ export default class User extends Component {
   render () {
     let userInfo = this.props.userInfo || {}
 
+    if (userInfo.login === false) {
+      setTimeout(() => this.props.history.push('/login'), 1)
+    }
+
     return (
       <div className="user">
         <Header {...this.props} title="登录"/>

@@ -14,7 +14,7 @@ export const fetchUserInfoAsync = () => dispatch => {
 
   return fetchUserInfo()
     .then(resp => dispatch(receivePostsDataUser('userInfo', resp.data.user)))
-    .catch(err => console.log(err))
+    .catch(err => dispatch(receivePostsDataUser('userInfo', { login: false })))
 }
 
 
