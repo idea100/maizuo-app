@@ -13,8 +13,8 @@ export default class CinemaGroup extends Component {
 
     return (
       <li>
+        <div>{ collections[0].district.name }</div>
         <ul>
-          <div>{ collections[0].district.name }</div>
           {
             collections.map(item => <CinemaItem key={ item.id } cinemaItem={item} />)
           }
