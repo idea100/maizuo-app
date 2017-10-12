@@ -24,5 +24,8 @@ export const fetchVerifyCode = (mobile = '', type = '2') => fetch('POST', 'v4/ap
 // 获取用户信息
 export const fetchUserInfo = () => fetch('GET', 'v4/api/me')
 
-/// 注销登录
+// 注销登录
 export const fetchLogout = () => fetch('POST', 'v4/api/logout')
+
+// 获取全部影院
+export const fetchCinemas = () => fetch('GET', 'v4/api/cinema')

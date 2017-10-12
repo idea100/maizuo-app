@@ -29,7 +29,7 @@ export default class User extends Component {
 
     return (
       <div className="user">
-        <Header {...this.props} title="登录"/>
+        <Header {...this.props} title="我的"/>
         <div className="user-info">
           <img src={userInfo.avatorUrl} alt=""/>
 
