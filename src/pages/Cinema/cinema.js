@@ -11,6 +11,12 @@ export default class User extends Component {
 
   componentDidMount () {
     this.props.fetchCinemas()
+    this.onCinemaItemClick = this.onCinemaItemClick.bind(this)
+  }
+
+  onCinemaItemClick (item) {
+    console.log(item)
+    this.props.history.push(`/cinema/${item.id}`)
   }
 
   render () {
@@ -22,7 +28,7 @@ export default class User extends Component {
 
         <ul className="ul-none">
           {
-            _.map(groupCinemas, (collections, key) => <CinemaGroup key={key} collections={collections} />)
+            _.map(groupCinemas, (collections, key) => <CinemaGroup onCinemaItemClick={ this.onCinemaItemClick } key={key} collections={collections} />)
           }
         </ul>
       </div>

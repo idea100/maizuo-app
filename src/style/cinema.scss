@@ -13,4 +13,79 @@
     color: #636363;
     cursor: pointer;
   }
+
+  &-li {
+    margin: 0 auto;
+    border-bottom: 1px solid #e1e1e1;
+    cursor: pointer;
+    min-width: 320px;
+  }
+
+  &-item {
+    border-radius: 5px;
+    padding: 10px 0 12px 16px;
+    cursor: pointer;
+
+    &:after {
+      @include cleanFloat;
+    }
+  }
+
+  &-content {
+    width: 75%;
+    min-width: 230px;
+    float: left;
+    cursor: pointer;
+    overflow: hidden;
+
+    .cinema-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: text-top;
+      max-width: 80%;
+    }
+
+    .item1 {
+      display: inline-block;
+      font-size: 16px;
+      width: 100%;
+      margin-bottom: 5px;
+    }
+
+    .item2 {
+      display: inline-block;
+      margin-bottom: 5px;
+      font-size: 10px;
+    }
+
+    .item3 {
+      display: inline-block;
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      color: #ccc;
+    }
+
+    .item4 {
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    .tip_01 {
+      background-color: #51add0;
+      display: inline-block;
+      border-radius: 3px;
+      padding: 0 5px;
+      margin: 0 5px;
+      font-style: normal;
+      color: #fff;
+      height: 15px;
+      line-height: 15px;
+    }
+
+  }
 }

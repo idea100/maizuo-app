@@ -18,6 +18,12 @@ export default class CinemaGroup extends Component {
     })
   }
 
+  onCinemaItemClick (item) {
+    if (typeof this.props.onCinemaItemClick === 'function') {
+      this.props.onCinemaItemClick(item)
+    }
+  }
+
   render () {
     let collections = this.props.collections
 
@@ -30,7 +36,7 @@ export default class CinemaGroup extends Component {
 
         <ul className={ this.state.showItems ? 'ul-none' : 'ul-none hide' }>
           {
-            collections.map(item => <CinemaItem key={ item.id } cinemaItem={item} />)
+            collections.map(item => <CinemaItem onCinemaItemClick={ () => this.onCinemaItemClick(item) } key={ item.id } cinemaItem={item} />)
           }
         </ul>
 
