@@ -19,7 +19,9 @@ export default class User extends Component {
         <Header {...this.props} title={ cinema.name || '' }/>
 
         <div>
-          { cinema.name || '' }
+          <div className="cinema-img">
+            <img className={ cinema.name ? 'opacity-show' : 'opacity-hide' } src="//static.m.maizuo.com/v4/static/app/asset/66461d1a02a9eaa64876c90952c42aed.png" alt=""/>
+          </div>
         </div>
       </div>
     )
