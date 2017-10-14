@@ -4,6 +4,7 @@ import City from '@/pages/citys'
 import Login from '@/pages/login'
 import User from '@/pages/User'
 import Cinema from '@/pages/Cinema'
+import { CinemaDetail } from '@/pages/Cinema'
 
 import {
   Router,
@@ -40,7 +41,8 @@ class App extends Component {
             <Route path="/citys" component={ City }></Route>
             <Route path="/login" component={ Login }></Route>
             <Route path="/user" component={ User }></Route>
-            <Route path="/cinema" component={ Cinema }></Route>
+            <Route exact path="/cinema" component={ Cinema }></Route>
+            <Route path="/cinema/:id" component={ CinemaDetail }></Route>
           </div>
         </Router>
       </Provider>

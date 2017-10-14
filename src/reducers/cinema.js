@@ -1,12 +1,16 @@
 import { createActions, handleActions, combineActions } from 'redux-actions'
-import { fetchCinemas } from '@/service/getData'
+import { fetchCinemas, fetchCinemaDetail } from '@/service/getData'
 
 const {
   requestPostsDataCinemas,
   receivePostsDataCinemas,
+  requestPostsDataCinemasDetail,
+  receivePostsDataCinemasDetail,
 } = createActions({
   'REQUEST_POSTS_DATA_CINEMAS': key => ({key}),
-  'RECEIVE_POSTS_DATA_CINEMAS': (key, resp) => ({key, resp})
+  'RECEIVE_POSTS_DATA_CINEMAS': (key, resp) => ({key, resp}),
+  'REQUEST_POSTS_DATA_CINEMAS_DETAIL': key => ({key}),
+  'RECEIVE_POSTS_DATA_CINEMAS_DETAIL': (key, resp) => ({key, resp})
 })
 
 export const fetchCinemasAsync = () => dispatch => {
@@ -17,16 +21,26 @@ export const fetchCinemasAsync = () => dispatch => {
     .catch(err => console.log(err))
 }
 
+export const fetchCinemaAsync = (id) => dispatch => {
+  dispatch(requestPostsDataCinemasDetail('cinema'))
+
+  return fetchCinemaDetail(id)
+    .then(resp => dispatch(receivePostsDataCinemasDetail('cinema', resp.data.cinema)))
+    .catch(err => console.log(err))
+}
+
 export default handleActions({
   [combineActions(
     requestPostsDataCinemas,
-    receivePostsDataCinemas
+    receivePostsDataCinemas,
+    requestPostsDataCinemasDetail,
+    receivePostsDataCinemasDetail
   )]( state, { payload: { key, resp } } ) {
     return {
       ...state,
       [key]: resp
     }
   }
-}, { cinemas: [] })
+}, { cinemas: [], cinema: {} })
 
 

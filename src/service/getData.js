@@ -29,3 +29,6 @@ export const fetchLogout = () => fetch('POST', 'v4/api/logout')
 
 // 获取全部影院
 export const fetchCinemas = () => fetch('GET', 'v4/api/cinema')
+
+// 获取影院详情
+export const fetchCinemaDetail = id => fetch('GET', `v4/api/cinema/${id}`)
