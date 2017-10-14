@@ -27,14 +27,13 @@ export default class CinemaGroup extends Component {
           onClick={ this.toggleCinemaItems }
           className="district-cinemas"
         >{ collections[0].district.name }</div>
-        {
-          this.state.showItems ?
-          (<ul className="ul-none">
-            {
-              collections.map(item => <CinemaItem key={ item.id } cinemaItem={item} />)
-            }
-          </ul>) : ''
-        }
+
+        <ul className={ this.state.showItems ? 'ul-none' : 'ul-none hide' }>
+          {
+            collections.map(item => <CinemaItem key={ item.id } cinemaItem={item} />)
+          }
+        </ul>
+
       </li>
     )
   }
