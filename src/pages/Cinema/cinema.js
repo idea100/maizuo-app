@@ -20,7 +20,7 @@ export default class User extends Component {
       <div className="cinema">
         <Header {...this.props} title="全部影院"/>
 
-        <ul>
+        <ul className="ul-none">
           {
             _.map(groupCinemas, (collections, key) => <CinemaGroup key={key} collections={collections} />)
           }

@@ -25,6 +25,9 @@ html, body {
   font-family: sans-serif;
 }
 
+.hide {
+  display: none;
+}
 
 .header {
   width: 100%;
@@ -236,3 +239,4 @@ html, body {
 @import "./city.scss";
 @import "./login.scss";
 @import "./user.scss";
+@import "./cinema.scss";

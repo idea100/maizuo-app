@@ -1,0 +1,16 @@
+.cinema {
+  .ul-none {
+    @include listNone;
+  }
+
+  .district-cinemas {
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    padding-left: 16px;
+    background: #e1e1e1;
+    margin-bottom: 1px;
+    color: #636363;
+    cursor: pointer;
+  }
+}
