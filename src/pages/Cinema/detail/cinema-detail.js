@@ -5,6 +5,14 @@ import Header from '@/container/header'
 export default class User extends Component {
   constructor (props) {
     super(props)
+    this.onOtherClick = this.onOtherClick.bind(this)
+    this.state = {
+      num: 0
+    }
+  }
+
+  onOtherClick (num) {
+    this.setState({ num })
   }
 
   componentDidMount () {
@@ -13,6 +21,8 @@ export default class User extends Component {
 
   render () {
     let cinema = this.props.cinema
+    let services = cinema.services || []
+    let showDetail = services[this.state.num] || {}
     console.log(cinema)
     return (
       <div className="cinema">
@@ -82,8 +92,31 @@ export default class User extends Component {
 
         <div className="other-detail-item">
           <ul className="list-inline">
-
+            <li>
+              <i className="iconfont icon-ticket" onClick={ () => this.onOtherClick(0) }></i>
+              <div>取票</div>
+            </li>
+            <li>
+              <i className="iconfont icon-glasses" onClick={ () => this.onOtherClick(2) }></i>
+              <div>3D</div>
+            </li>
+            <li>
+              <i className="iconfont icon-parking" onClick={ () => this.onOtherClick(1) }></i>
+              <div>停车</div>
+            </li>
+            <li>
+              <i className="iconfont icon-gift" onClick={ () => this.onOtherClick(3) }></i>
+              <div>优惠</div>
+            </li>
+            <li>
+              <i className="iconfont icon-bus" onClick={ () => this.onOtherClick(4) }></i>
+              <div>交通</div>
+            </li>
           </ul>
+
+          <div className="show-other-detail">
+            { showDetail.description }
+          </div>
         </div>
 
       </div>

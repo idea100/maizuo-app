@@ -175,11 +175,33 @@
     margin-top: 15px;
     cursor: pointer;
 
-    .list-inline {
-      padding-left: 0;
-      margin-left: -5px;
-      list-style: none;
+    .iconfont:before {
+      border: 1px solid;
+      border-radius: 50%;
+      padding: 3px;
+    }
 
+    .list-inline {
+      padding: 0;
+      margin: 0 30px;
+      list-style: none;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+
+      li {
+        display: inline-block;
+        margin: auto;
+        padding: 10px 0;
+        flex-grow: 1;
+        border-bottom: 1px solid;
+        text-align: center;
+      }
+    }
+
+    .show-other-detail {
+      margin: 0 30px;
+      font-size: 12px;
     }
   }
 
