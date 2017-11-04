@@ -38,7 +38,7 @@ export default class Cities extends Component {
     if (/^[A-Z]$/.test(key) || key === '热门城市') {
       postCityId(item.id)
         .then(resp => this.props.history.push('/'))
-        .catch(err => console.log(resp))
+        .catch(err => console.log(err))
     }
   }
 
