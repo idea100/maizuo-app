@@ -26,7 +26,7 @@ export default class Cities extends Component {
   }
 
   onCityItemClick (options) {
-    let { items, item, key, $el } = options
+    let { item, key } = options
 
     if (key === '按字母排序') {
       const offsetTop = this['city_' + item.name].getOffsetTop()

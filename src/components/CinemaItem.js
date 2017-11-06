@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 
 export default class CinemaItem extends Component {
 
-  constructor (props) {
-    super(props)
-  }
-
   onCinemaItemClick() {
     if (typeof this.props.onCinemaItemClick === 'function') {
       this.props.onCinemaItemClick()

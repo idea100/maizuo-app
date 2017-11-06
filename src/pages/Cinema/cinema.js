@@ -3,12 +3,7 @@ import Header from '@/container/header'
 import CinemaGroup from '@/components/CinemaGroup'
 import _ from 'lodash'
 
-
 export default class User extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   componentDidMount () {
     this.props.fetchCinemas()
     this.onCinemaItemClick = this.onCinemaItemClick.bind(this)

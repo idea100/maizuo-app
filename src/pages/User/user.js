@@ -37,7 +37,7 @@ export default class User extends Component {
             <div className="detail-line">{userInfo.name}</div>
             <div className="detail-line detail-id">ID:{userInfo.id}</div>
             <div className="detail-line detail-logout">
-              <a href="#" onClick={this.onLogout}>退出</a>
+              <a onClick={this.onLogout}>退出</a>
             </div>
           </div>
 

@@ -13,7 +13,7 @@ export default props => {
       {
         items.map((item, index) => (
           <div className="coming-soon" key={index}>
-            <img src={item.cover.origin}/>
+            <img src={item.cover.origin} alt={item.name}/>
             <div className="coming-movice-msg">
               <span className="msg-left">{item.name}</span>
               <span className="msg-right">{formatterMothAndDate(item.premiereAt)}上映</span>

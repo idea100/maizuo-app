@@ -9,7 +9,7 @@ export default props => {
       items.map((item,index) =>
       (
         <div className="now-playing" key={index}>
-          <img src={item.cover.origin}/>
+          <img src={item.cover.origin} alt={item.name}/>
           <div className="movice-msg">
             <span>{item.name}</span><br/>
             <span>{item.cinemaCount}家影院上映 {item.watchCount}人购票</span>
