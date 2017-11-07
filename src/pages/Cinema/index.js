@@ -2,6 +2,7 @@ import Cinema from './cinema'
 import { connect } from 'react-redux'
 import { fetchCinemasAsync } from 'reducers/cinema'
 import CinemaDetail from './detail'
+import CinemaFilms from './films'
 
 const mapStateToProps = (state) => {
   const { cinemas = [] } = state.cinemas
@@ -16,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export { CinemaDetail }
+export { CinemaDetail, CinemaFilms }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cinema)
 
