@@ -1,3 +1,18 @@
-import React from 'react'
+import CinemaFilms from './cinema-films'
+import { connect } from 'react-redux'
+import { fetchCinemaAsync } from 'reducers/cinema'
 
-export default () => <div>cinema films</div>
+const mapStateToProps = (state) => {
+    const { cinema = {} } = state.cinemas
+    return { cinema }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchCinema: id => dispatch(fetchCinemaAsync(id))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CinemaFilms)
+
