@@ -1,6 +1,6 @@
 import Content from './content'
 import { connect } from 'react-redux'
-import { fetchImagesAsync, fetchNowPlayingAsync, fetchComingSoonAsync } from '@/reducers/home'
+import { fetchImagesAsync, fetchNowPlayingAsync, fetchComingSoonAsync } from 'reducers/home'
 
 const mapStateToProps = (state) => {
   const { images = [], nowPlaying = [], comingSoon = [] } = state.home

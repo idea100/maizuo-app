@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Header from '@/container/header'
-import { fetchLogout } from '@/service/getData'
+import Header from 'container/header'
+import { fetchLogout } from 'service/getData'
 
 export default class User extends Component {
   constructor (props) {

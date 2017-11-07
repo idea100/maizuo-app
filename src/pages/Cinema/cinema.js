@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Header from '@/container/header'
-import CinemaGroup from '@/components/CinemaGroup'
+import Header from 'container/header'
+import CinemaGroup from 'components/CinemaGroup'
 import _ from 'lodash'
 
 export default class User extends Component {

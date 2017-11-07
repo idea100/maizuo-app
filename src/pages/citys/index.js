@@ -1,6 +1,6 @@
 import City from './city'
 import { connect } from 'react-redux'
-import { fetchCitiesAsync } from '@/reducers/city'
+import { fetchCitiesAsync } from 'reducers/city'
 
 const mapStateToProps = (state) => {
   const { cities = [] } = state.city

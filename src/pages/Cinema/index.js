@@ -1,6 +1,6 @@
 import Cinema from './cinema'
 import { connect } from 'react-redux'
-import { fetchCinemasAsync } from '@/reducers/cinema'
+import { fetchCinemasAsync } from 'reducers/cinema'
 import CinemaDetail from './detail'
 
 const mapStateToProps = (state) => {

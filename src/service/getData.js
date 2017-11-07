@@ -1,4 +1,4 @@
-import fetch from '@/config/fetch'
+import fetch from 'config/fetch'
 
 // 获取轮播图片
 export const fetchImages = () => fetch('GET', 'v4/api/billboard/home')

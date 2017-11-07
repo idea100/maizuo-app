@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import Content from '@/pages/root'
-import City from '@/pages/citys'
-import Login from '@/pages/login'
-import User from '@/pages/User'
-import Cinema from '@/pages/Cinema'
-import { CinemaDetail } from '@/pages/Cinema'
+import Content from 'pages/root'
+import City from 'pages/citys'
+import Login from 'pages/login'
+import User from 'pages/User'
+import Cinema from 'pages/Cinema'
+import { CinemaDetail } from 'pages/Cinema'
 
 import {
   Router,
@@ -15,7 +15,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import reducers from '@/reducers'
+import reducers from 'reducers'
 import createHistory from 'history/createBrowserHistory'
 
 const middleware = [ thunk ]

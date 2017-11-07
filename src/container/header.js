@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AlignJustify, User } from 'react-feather'
-import { getCookie } from '@/config/utils'
+import { getCookie } from 'config/utils'
 
 export default class Header extends Component {
 

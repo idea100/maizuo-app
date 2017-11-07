@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Header from '@/container/header'
+import Header from 'container/header'
 
 
 export default class User extends Component {

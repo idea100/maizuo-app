@@ -1,5 +1,5 @@
 import { createActions, handleActions, combineActions } from 'redux-actions'
-import { fetchCinemas, fetchCinemaDetail } from '@/service/getData'
+import { fetchCinemas, fetchCinemaDetail } from 'service/getData'
 
 const {
   requestPostsDataCinemas,

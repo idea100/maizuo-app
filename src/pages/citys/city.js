@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Header from '@/container/header'
-import { postCityId } from '@/service/getData'
+import Header from 'container/header'
+import { postCityId } from 'service/getData'
 import _ from 'lodash'
-import CityItem from '@/components/CityItem'
+import CityItem from 'components/CityItem'
 
 
 export default class Cities extends Component {

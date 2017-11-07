@@ -1,5 +1,5 @@
 import { createActions, handleActions, combineActions } from 'redux-actions'
-import { fetchUserInfo } from '@/service/getData'
+import { fetchUserInfo } from 'service/getData'
 
 export const {
   requestPostsDataUser,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Header from '@/container/header'
-import { postLogin, fetchVerifyCode } from '@/service/getData'
+import Header from 'container/header'
+import { postLogin, fetchVerifyCode } from 'service/getData'
 import MD5 from 'md5'
 
 export default class Login extends Component {

@@ -1,5 +1,5 @@
 import { createActions, handleActions, combineActions } from 'redux-actions'
-import { fetchCitys } from '@/service/getData'
+import { fetchCitys } from 'service/getData'
 
 const {
   requestPostsDataCity,

@@ -1,6 +1,6 @@
 import User from './user'
 import { connect } from 'react-redux'
-import { fetchUserInfoAsync } from '@/reducers/user'
+import { fetchUserInfoAsync } from 'reducers/user'
 
 const mapStateToProps = (state) => {
   const { user } = state

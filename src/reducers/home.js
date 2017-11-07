@@ -1,5 +1,5 @@
 import { createActions, handleActions, combineActions } from 'redux-actions'
-import { fetchImages, fetchNowPlaying, fetchComingSoon } from '@/service/getData'
+import { fetchImages, fetchNowPlaying, fetchComingSoon } from 'service/getData'
 
 const {
   requestPostsDataHome,
